@@ -9,23 +9,19 @@ fn price(product: u32) -> u32 { product }
 
 fn empty_basket() -> Vec<Product> { vec!() }
 
-fn sorted(basket: Vec<Product>) -> Vec<Product> {
-    let mut tmp = basket.clone();
-    tmp.sort();
-    return tmp;
-}
-
 fn sum_price(basket: &[Product]) -> u32 {
-    match basket {
-        [] => 0,
-        [PRODUCT_A, PRODUCT_A, PRODUCT_A, rest..] => 130 + sum_price(rest),
-        [PRODUCT_B, PRODUCT_B, rest..] => 45 + sum_price(rest),
-        [x, rest..] => price(x) + sum_price(rest)
-    }
+    let count_a = basket.iter().filter(|&x| *x == PRODUCT_A).count() as u32;
+    let count_b = basket.iter().filter(|&x| *x == PRODUCT_B).count() as u32;
+    let count_c = basket.iter().filter(|&x| *x == PRODUCT_C).count() as u32;
+
+    return
+        price(PRODUCT_A) * (count_a % 3) + (count_a / 3) * 130 +
+        price(PRODUCT_B) * (count_b % 2) + (count_b / 2) * 45 +
+        price(PRODUCT_C) * count_c;
 }
 
 fn total_price(basket: Vec<Product>) -> u32 {
-    sum_price(sorted(basket).as_slice())
+    sum_price(basket.as_slice())
 }
 
 #[test]
