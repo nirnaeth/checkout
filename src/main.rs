@@ -32,7 +32,7 @@ fn total_price_of_a_basket_with_a_product_is_the_price_of_the_product() {
 
 #[test]
 fn total_price_of_a_basket_with_two_products_is_their_sum() {
-    let basket = vec!(PRODUCT_A, PRODUCT_B);
+    let basket = vec!(PRODUCT_B, PRODUCT_C);
 
-    assert_eq!(total_price(basket.as_slice()), 80);
+    assert_eq!(total_price(basket.as_slice()), 50);
 }
